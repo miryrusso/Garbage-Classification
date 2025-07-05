@@ -1,5 +1,5 @@
 # Garbage-Classification
-# Garbage Classifier
+# DA RIVEDERE TOTALMENTE e tradurre
 
 ## Overview
 
@@ -63,7 +63,7 @@ We fine‑tune **EfficientNet‑B0** (via `timm`) initialised with ImageNet weig
 
 ## Reproducibility
 
-* Seed fixed at `42` (`torch.manual_seed(42)`).
+* Seed fixed at `123456789` (`torch.manual_seed(42)`).
 * Split: 65 % train, 15 % val, 20 % test (see `split_train_val_test`).
 
 ## Results (reference)
