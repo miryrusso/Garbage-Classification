@@ -2,6 +2,7 @@ from torchvision.models import efficientnet_v2_s, EfficientNet_V2_S_Weights
 import timm, torch.nn as nn
 from torch.optim import SGD
 import os
+import torch, time
 
 def train_validate(model, garbage_train_loader, garbage_valid_loader,
                    epochs=5, lr=1e-3, momentum=0.9,
@@ -31,7 +32,7 @@ def train_validate(model, garbage_train_loader, garbage_valid_loader,
         print(f"Ripreso da: {resume_from} | epoca {start_epoch} | best_acc: {best_val_acc:.3f}")
 
     num_model_classes = model.classifier[-1].out_features
-    save_dir = '/savings'
+    save_dir = './savings'
     os.makedirs(save_dir, exist_ok=True)
 
     for ep in range(start_epoch, epochs + 1):

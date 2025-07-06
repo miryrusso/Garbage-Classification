@@ -1,2 +1,5 @@
 # Ignore the garbage_dataset directory
 /dataset/garbage_dataset/
+/.venv
+/.gradio
+**/__pycache__/
