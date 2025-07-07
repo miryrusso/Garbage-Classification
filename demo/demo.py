@@ -32,4 +32,5 @@ def predict(img: Image.Image):
 gr.Interface(fn=predict,
              theme=gr.themes.Ocean(),
              inputs=gr.Image(type="pil"),
-             outputs=gr.Label(num_top_classes=2)).launch()
+             outputs=gr.Label(num_top_classes=2),
+             example=["cocacola.jpeg", "bottiglia.jpg", "carta.jpg", "vetro.png"]).launch()
