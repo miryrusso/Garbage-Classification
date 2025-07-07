@@ -5,7 +5,6 @@ from torch.utils.data import DataLoader
 import os
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-print("Dispositivo attivo:", device)
 os.environ["CUDA_LAUNCH_BLOCKING"] = "1"
 # Trasformazioni per il training e il test
 # Le trasformazioni sono utili per aumentare la varietà dei dati di training

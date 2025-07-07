@@ -15,13 +15,10 @@ def plot_class_distribution(loader, class_dict, title='Distribuzione per classi'
     """
     labels = [label for _, label in loader.dataset]
     
-    # Conta le occorrenze
     label_counts = Counter(labels)
 
-    # Inverti il dizionario class_dict per mostrare i nomi
     inv_class_dict = {v - 1: k for k, v in class_dict.items()}
 
-    # Plotta
     plt.figure(figsize=(8, 4))
     plt.bar(
         [inv_class_dict[i] for i in sorted(label_counts.keys())],
@@ -33,20 +30,16 @@ def plot_class_distribution(loader, class_dict, title='Distribuzione per classi'
     plt.tight_layout()
     plt.show()
 
+
 def evaluate(model, loader, device=None, target_names=None):
     device = device or ('cuda' if torch.cuda.is_available() else 'cpu')
     model.eval().to(device)
-    # correct = 0
-    # total = 0
     all_preds = []
     all_labels = []
     with torch.no_grad():
         for images, labels in loader:
             images, labels = images.to(device), labels.to(device)
             outputs = model(images).argmax(1)
-            # _, preds = torch.max(outputs, 1)
-            # correct += (outputs == labels).sum().item()
-            # total += labels.size(0)
             all_preds.extend(outputs.cpu().numpy())
             all_labels.extend(labels.cpu().numpy())
     # Calcolo metriche
@@ -63,7 +56,6 @@ def evaluate(model, loader, device=None, target_names=None):
     print("\n Confusion Matrix:")
     print(cm)
 
-    # Report dettagliato (opzionale)
     if target_names:
         print("\n Classification Report:")
         print(classification_report(all_labels, all_preds, target_names=target_names))
@@ -96,3 +88,29 @@ def plot_confusion_matrix(model, loader, class_names, device=None):
     plt.title('Confusion Matrix')
     plt.tight_layout()
     plt.show()
+
+
+def plot_metrics_bar(acc, prec, rec, f1):
+    import matplotlib.pyplot as plt
+
+    metrics = ['Accuracy', 'Precision', 'Recall', 'F1 Score']
+    values = [acc, prec, rec, f1]
+
+    plt.figure(figsize=(6, 4))
+    bars = plt.bar(metrics, values, color=['#4CAF50', '#2196F3', '#FFC107', '#F44336'])
+    plt.ylim(0, 1)
+    plt.title('Altre metriche di classificazione')
+    for bar in bars:
+        yval = bar.get_height()
+        plt.text(bar.get_x() + bar.get_width()/2 - 0.1, yval + 0.02, f"{yval:.2f}", fontsize=10)
+    plt.tight_layout()
+    plt.show()
+
+def plot_loss_acc_per_epoch(loss_history_train, loss_history_val, acc_history_train, acc_history_val):
+    plt.plot(loss_history_train, label='Train'); plt.plot(loss_history_val, label='Val')
+    plt.xlabel('Epoch'); plt.ylabel('Cross-entropy loss'); plt.legend(); plt.grid()
+    plt.title('Loss curve'); plt.show()
+
+    plt.plot(acc_history_train, label='Train'); plt.plot(acc_history_val, label='Val')
+    plt.xlabel('Epoch'); plt.ylabel('Accuracy'); plt.legend(); plt.grid()
+    plt.title('Accuracy curve'); plt.show()
