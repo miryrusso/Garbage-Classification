@@ -4,6 +4,9 @@ from torch.optim import SGD
 import os
 import torch, time
 from torch.utils.tensorboard import SummaryWriter
+import importlib
+from dataset import dataset
+importlib.reload(dataset)
 
 
 
@@ -14,11 +17,10 @@ def train_validate(garbage_train_loader, garbage_valid_loader, log_dir,
                    resume_from=None):
     writer = SummaryWriter(log_dir=log_dir)   # dashboard live
     global_step = 0                           # contatore campioni visti
-    device = device or ('cuda' if torch.cuda.is_available() else 'cpu')
 
     weights = EfficientNet_V2_S_Weights.DEFAULT
     model = efficientnet_v2_s(weights=weights)
-    num_classes = len(class_dict)
+    num_classes = len(dataset.class_dict)
 
     if dropout:
       model.classifier = nn.Sequential(nn.Dropout(p=0.3), nn.Linear(
@@ -43,7 +45,7 @@ def train_validate(garbage_train_loader, garbage_valid_loader, log_dir,
 
     # Riprendi da checkpoint se fornito
     if resume_from:
-        checkpoint = torch.load(resume_from)
+        checkpoint = torch.load(resume_from, map_location=torch.device(device))
         model.load_state_dict(checkpoint['model_state_dict'])
         optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
         start_epoch = checkpoint['epoch'] + 1
@@ -51,7 +53,7 @@ def train_validate(garbage_train_loader, garbage_valid_loader, log_dir,
         print(f"Ripreso da: {resume_from} | epoca {start_epoch} | best_acc: {best_val_acc:.3f}")
 
     num_model_classes = model.classifier[-1].out_features
-    save_dir = '/content/drive/MyDrive/modelli_garbage'
+    save_dir = './savings'
     os.makedirs(save_dir, exist_ok=True)
 
     for ep in range(start_epoch, epochs + 1):
