@@ -13,7 +13,7 @@ import gradio as gr
 model = efficientnet_v2_s()
 model.classifier[-1] = nn.Linear(model.classifier[-1].in_features, 6)
 
-checkpoint = torch.load('../savings/best_model.pt', map_location='cpu')
+checkpoint = torch.load('../savings/best_model_dropout.pt', map_location='cpu')
 
 model.load_state_dict(checkpoint['model_state_dict'])
 model.eval()
@@ -33,4 +33,4 @@ gr.Interface(fn=predict,
              theme=gr.themes.Ocean(),
              inputs=gr.Image(type="pil"),
              outputs=gr.Label(num_top_classes=2),
-             example=["./imgs/cocacola.jpeg", "./imgs/bottiglia.jpg", "./imgs/carta.jpg", "./imgs/vetro.png"]).launch()
+             examples=["./imgs/cocacola.jpeg", "./imgs/bottiglia.jpg", "./imgs/carta.jpg", "./imgs/vetro.png"]).launch()
