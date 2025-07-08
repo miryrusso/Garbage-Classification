@@ -7,7 +7,7 @@ Lo scopo di questo progetto è quello di allenare un modello affinchè sappia cl
 ## Dataset
 
 È stato utilizzato un dataset kaggle [**Garbage Classification**](https://www.kaggle.com/datasets/asdasdasasdas/garbage-classification/data) (≈2.5 k immagini, ritagliate 384x384). 
-Esso viene automaticamente scaricato dataset all'avvio del file *main.py*.
+Esso viene automaticamente scaricato dataset all'avvio del file *main.ipynb*.
 
 ## Layout Progetto
 
