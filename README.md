@@ -36,10 +36,12 @@ project-garbage-classifier/
 ```bash
 # 1. crea e attiva i;lvirtual env
 python3 -m venv .venv && source .venv/bin/activate
-
+```
+```bash
 # 2. installa le dipendenze
 pip install -r requirements.txt
-
+```
+```bash
 # 3. demo
 cd demo
 python3 demo.py
