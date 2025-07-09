@@ -6,14 +6,6 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_sc
 import seaborn as sns
 
 def plot_class_distribution(loader, class_dict, title='Distribuzione per classi'):
-    """
-    Plotta la distribuzione delle classi in un dataset PyTorch.
-
-    Args:
-        dataset (Dataset): Dataset in cui ciascun elemento è una tupla (immagine, label).
-        class_dict (dict): Dizionario che mappa le classi (es: {"cardboard": 1, "glass": 2, ...}).
-        title (str): Titolo del grafico.
-    """
     labels = [label for _, label in loader.dataset]
     
     label_counts = Counter(labels)

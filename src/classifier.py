@@ -11,8 +11,6 @@ importlib.reload(dataset)
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-
-
 def train_validate(garbage_train_loader, garbage_valid_loader, log_dir,
                    early_stop=0, dropout = False,
                    epochs=5, lr=1e-3, momentum=0.9,
@@ -22,7 +20,7 @@ def train_validate(garbage_train_loader, garbage_valid_loader, log_dir,
     global_step = 0  
     
     loss_history_train, loss_history_val = [], []
-    acc_history_train,  acc_history_val  = [], []                         # contatore campioni visti
+    acc_history_train,  acc_history_val  = [], []                       
 
     weights = EfficientNet_V2_S_Weights.DEFAULT
     model = efficientnet_v2_s(weights=weights)
@@ -85,8 +83,8 @@ def train_validate(garbage_train_loader, garbage_valid_loader, log_dir,
             optimizer.step()
 
             n = x.size(0)
-            global_step += n # [NUOVO]
-            writer.add_scalar('loss/train_iter', loss.item(), global_step) # [NUOVO]
+            global_step += n 
+            writer.add_scalar('loss/train_iter', loss.item(), global_step) 
             running_loss += loss.item() * n
             running_acc  += (out.argmax(1) == y).sum().item()
             seen += n
@@ -94,7 +92,7 @@ def train_validate(garbage_train_loader, garbage_valid_loader, log_dir,
             if step % log_every == 0:
                 print(f'Epoch {ep} | step {step}/{len(garbage_train_loader)} '
                       f'loss {running_loss/seen:.4f} acc {running_acc/seen:.3f}')
-                writer.add_scalar('loss/train_epoch', loss.item(), global_step) # [NUOVO]
+                writer.add_scalar('loss/train_epoch', loss.item(), global_step)
 
         #[NUOVO]
         train_epoch_loss = running_loss / seen
@@ -120,10 +118,10 @@ def train_validate(garbage_train_loader, garbage_valid_loader, log_dir,
         val_loss /= seen
         val_acc  /= seen
         dt = time.time() - t0
-        writer.add_scalar('loss/val_epoch', val_loss, ep) # [NUOVO]
-        writer.add_scalar('acc/val_epoch',  val_acc,  ep) # [Nuovo]
-        loss_history_val.append(val_loss) # [Nuovo]
-        acc_history_val.append(val_acc) # [Nuovo]
+        writer.add_scalar('loss/val_epoch', val_loss, ep) 
+        writer.add_scalar('acc/val_epoch',  val_acc,  ep) 
+        loss_history_val.append(val_loss) 
+        acc_history_val.append(val_acc) 
         print(f'- Epoch {ep} done in {dt:.1f}s | val_loss {val_loss:.4f} val_acc {val_acc:.3f}')
 
         #SALVA MIGLIOR MODELLO
@@ -145,7 +143,6 @@ def train_validate(garbage_train_loader, garbage_valid_loader, log_dir,
                 print("Early stopping attivato.")
                 break
 
-        #SALVA OGNI 2 EPOCHE PERCHE VOLEVO PROVARE MA DA MODIFICARE
         if ep % 2 == 0:
             torch.save({
                 'epoch': ep,
@@ -157,7 +154,7 @@ def train_validate(garbage_train_loader, garbage_valid_loader, log_dir,
             print(f' checkpoint completo salvato: checkpoint_epoch{ep}.pth')
 
     print('Miglior accuratezza validazione:', best_val_acc)
-    writer.close() # [NUOVO]
+    writer.close() 
     return model
 
 def load_model(path, device='cpu'):
@@ -180,7 +177,6 @@ def test_model(model, dataloader, checkpoint_path, device=None, class_names=None
     if not os.path.exists(checkpoint_path):
         raise FileNotFoundError(f"Checkpoint non trovato: {checkpoint_path}")
 
-    # Carica stato del modello
     checkpoint = torch.load(checkpoint_path, map_location=device)
     model.load_state_dict(checkpoint['model_state_dict'])
     print(f"Modello caricato da: {checkpoint_path}")
@@ -202,7 +198,6 @@ def test_model(model, dataloader, checkpoint_path, device=None, class_names=None
     acc = (all_preds == all_labels).mean()
     print(f"\n Accuracy sul test set: {acc:.4f}\n")
 
-    # Class names
     if class_names is None:
         class_names = [str(i) for i in sorted(set(all_labels))]
 

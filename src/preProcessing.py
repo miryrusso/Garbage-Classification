@@ -6,9 +6,8 @@ import os
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 os.environ["CUDA_LAUNCH_BLOCKING"] = "1"
+
 # Trasformazioni per il training e il test
-# Le trasformazioni sono utili per aumentare la varietà dei dati di training
-# e per normalizzare le immagini in modo che abbiano media 0 e deviazione standard
 train_transform = transforms.Compose([
     transforms.Resize(400),
     transforms.RandomCrop(384),  #384 perché EfficientNetV2_s é stata allenata su immagini di questa dimensione
