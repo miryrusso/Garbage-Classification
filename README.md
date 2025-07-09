@@ -1,5 +1,8 @@
 # Garbage-Classification
 
+## Autori
+Questo progetto è stato realizzato da Giada Margarone e Miriana Russo
+
 ## Overview
 
 Lo scopo di questo progetto è quello di allenare un modello affinchè sappia classificare i rifiuti in 6 diverse classi(**glass, paper, cardboard, plastic, metal, trash**). 
