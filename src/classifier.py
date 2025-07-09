@@ -5,8 +5,11 @@ import os
 import torch, time
 from torch.utils.tensorboard import SummaryWriter
 import importlib
+from sklearn.metrics import classification_report, confusion_matrix
 from dataset import dataset
 importlib.reload(dataset)
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 
 
@@ -154,3 +157,62 @@ def train_validate(garbage_train_loader, garbage_valid_loader, log_dir,
     writer.close() # [NUOVO]
     return model
 
+def load_model(path, device='cpu'):
+    weights = EfficientNet_V2_S_Weights.DEFAULT
+    model = efficientnet_v2_s(weights=weights)
+
+    model.classifier = nn.Sequential(nn.Dropout(p=0.3), nn.Linear(
+        in_features = model.classifier[1].in_features,
+        out_features = len(dataset.class_dict)))
+    checkpoint = torch.load(path,  map_location=torch.device(device))
+    model.load_state_dict(checkpoint['model_state_dict'])
+    return model
+
+
+def test_model(model, dataloader, checkpoint_path, device=None, class_names=None):
+    device = device or ('cuda' if torch.cuda.is_available() else 'cpu')
+    model.to(device)
+    model.eval()
+
+    if not os.path.exists(checkpoint_path):
+        raise FileNotFoundError(f"Checkpoint non trovato: {checkpoint_path}")
+
+    # Carica stato del modello
+    checkpoint = torch.load(checkpoint_path, map_location=device)
+    model.load_state_dict(checkpoint['model_state_dict'])
+    print(f"Modello caricato da: {checkpoint_path}")
+
+    all_preds = []
+    all_labels = []
+
+    with torch.no_grad():
+        for x, y in dataloader:
+            x, y = x.to(device), y.to(device)
+            out = model(x)
+            preds = out.argmax(1)
+            all_preds.extend(preds.cpu().numpy())
+            all_labels.extend(y.cpu().numpy())
+
+    all_preds = dataset.np.array(all_preds)
+    all_labels = dataset.np.array(all_labels)
+
+    acc = (all_preds == all_labels).mean()
+    print(f"\n Accuracy sul test set: {acc:.4f}\n")
+
+    # Class names
+    if class_names is None:
+        class_names = [str(i) for i in sorted(set(all_labels))]
+
+    # Report
+    print("Classification Report:")
+    print(classification_report(all_labels, all_preds, target_names=class_names))
+
+    # Confusion Matrix
+    cm = confusion_matrix(all_labels, all_preds)
+    plt.figure(figsize=(8, 6))
+    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
+                xticklabels=class_names, yticklabels=class_names)
+    plt.xlabel('Predetto')
+    plt.ylabel('Reale')
+    plt.title('Matrice di Confusione')
+    plt.show()
