@@ -33,4 +33,4 @@ gr.Interface(fn=predict,
              theme=gr.themes.Ocean(),
              inputs=gr.Image(type="pil"),
              outputs=gr.Label(num_top_classes=3),
-             examples=["./imgs/cocacola.jpeg", "./imgs/bottiglia.jpg", "./imgs/carta.jpg", "./imgs/vetro.jpeg", "./imgs/trash.png"]).launch()
+             examples=["./imgs/cocacola.png", "./imgs/bottiglia.jpg", "./imgs/carta.jpg", "./imgs/vetro.jpeg"]).launch()
