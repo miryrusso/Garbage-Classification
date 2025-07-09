@@ -31,7 +31,7 @@ project-garbage-classifier/
 └── .gitignore
 ```
 
-## Quick Start
+## Demo quick start
 
 ```bash
 # 1. crea e attiva i;lvirtual env
@@ -46,6 +46,12 @@ pip install -r requirements.txt
 cd demo
 python3 demo.py
 ```
+
+https://github.com/user-attachments/assets/23d15f5a-9557-4c70-8739-056b043f612e
+
+
+
+
 
 ## Relazione
 
