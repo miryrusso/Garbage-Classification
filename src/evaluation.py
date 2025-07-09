@@ -1,6 +1,7 @@
 # Metriche
 from collections import Counter
 import matplotlib.pyplot as plt
+import torch
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix, classification_report
 import seaborn as sns
 

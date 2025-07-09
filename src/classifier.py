@@ -19,7 +19,10 @@ def train_validate(garbage_train_loader, garbage_valid_loader, log_dir,
                    device=None, log_every=50,
                    resume_from=None):
     writer = SummaryWriter(log_dir=log_dir)   # dashboard live
-    global_step = 0                           # contatore campioni visti
+    global_step = 0  
+    
+    loss_history_train, loss_history_val = [], []
+    acc_history_train,  acc_history_val  = [], []                         # contatore campioni visti
 
     weights = EfficientNet_V2_S_Weights.DEFAULT
     model = efficientnet_v2_s(weights=weights)

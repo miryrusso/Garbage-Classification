@@ -19,8 +19,7 @@ if not os.path.exists(extract_dir):
     with zipfile.ZipFile(zip_path, 'r') as zip_ref:
         zip_ref.extractall(extract_dir)
     print("Dataset estratto con successo.")
-else:
-    print("Dataset già presente.")
+
 
 # Dizionario per mappare le classi ai numeri
 # Le classi sono le cartelle all'interno della cartella "Garbage classification"
