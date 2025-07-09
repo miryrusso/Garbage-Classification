@@ -14,16 +14,16 @@ Esso viene automaticamente scaricato dataset all'avvio del file *main.ipynb*.
 ```
 project-garbage-classifier/
 │
-├── README.md          ← *you are here*
-├── requirements.txt   ← pip dependencies
+├── README.md          
+├── requirements.txt   
 │
 ├── database/
-│   └── database.py    ← dataset download / CSV utilities
+│   └── database.py    
 │
 ├── src/
-│   ├── pre_processing.py  ← data transforms
-│   ├── classifier.py      ← model, training e evaluation
-│   └── main.py            ← command‑line entry point
+│   ├── pre_processing.py 
+│   ├── classifier.py      
+│   └── main.py           
 │
 └── .gitignore
 ```
@@ -31,10 +31,10 @@ project-garbage-classifier/
 ## Quick Start
 
 ```bash
-# 1. create & activate virtual env
+# 1. crea e attiva i;lvirtual env
 python3 -m venv .venv && source .venv/bin/activate
 
-# 2. install deps
+# 2. installa le dipendenze
 pip install -r requirements.txt
 
 # 3. demo
