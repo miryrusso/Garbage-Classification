@@ -30,6 +30,8 @@ project-garbage-classifier/
 │
 └── .gitignore
 ```
+## Dependencies 
+Assicurati di avere git lfs installato.
 
 ## Demo quick start
 
@@ -40,7 +42,7 @@ git clone https://github.com/miryrusso/Garbage-Classification.git
 
 ```bash
 # 2. Entra nella cartella
-cd Garbage-Classification
+cd Garbage-Classification && git lfs pull
 ```
 
 ```bash
