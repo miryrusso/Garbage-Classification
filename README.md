@@ -36,12 +36,13 @@ project-garbage-classifier/
 ```bash
 # 1. Clona la repository
 git clone https://github.com/miryrusso/Garbage-Classification.git
-```bash
+```
+
 ```bash
 # 2. Entra nella cartella
 cd Garbage-Classification
 ```
-```
+
 ```bash
 # 3. crea e attiva il virtual-env
 python3 -m venv .venv && source .venv/bin/activate
