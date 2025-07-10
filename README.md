@@ -10,7 +10,7 @@ Lo scopo di questo progetto è quello di allenare un modello affinchè sappia cl
 ## Dataset
 
 È stato utilizzato un dataset kaggle [**Garbage Classification**](https://www.kaggle.com/datasets/asdasdasasdas/garbage-classification/data) (≈2.5 k immagini, ritagliate 384x384). 
-Esso viene automaticamente scaricato dataset all'avvio del file *main.ipynb*.
+Il dataset viene automaticamente scaricato all'avvio del file *main.ipynb*.
 
 ## Layout Progetto
 
@@ -55,4 +55,4 @@ https://github.com/user-attachments/assets/23d15f5a-9557-4c70-8739-056b043f612e
 
 ## Relazione
 
-La rlazione si può trovare in *docs/relazione.pdf*
+La relazione finale del progetto è disponibile al seguente [**link**](https://github.com/miryrusso/Garbage-Classification/tree/main/docs)
