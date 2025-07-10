@@ -34,16 +34,16 @@ project-garbage-classifier/
 ## Demo quick start
 
 ```bash
-# 1. crea e attiva i;lvirtual env
-python3 -m venv .venv && source .venv/bin/activate
-```
-```bash
-# 2. Clona la repository
+# 1. Clona la repository
 git clone https://github.com/miryrusso/Garbage-Classification.git
+```bash
+# 2. Entra nella cartella
+cd Garbage-Classification
+```
 ```
 ```bash
-# 3. Entra nella cartella
-cd Garbage-Classification
+# 3. crea e attiva i;lvirtual env
+python3 -m venv .venv && source .venv/bin/activate
 ```
 ```bash
 # 4. installa le dipendenze
