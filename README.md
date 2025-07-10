@@ -38,11 +38,19 @@ project-garbage-classifier/
 python3 -m venv .venv && source .venv/bin/activate
 ```
 ```bash
-# 2. installa le dipendenze
+# 2. Clona la repository
+git clone https://github.com/miryrusso/Garbage-Classification.git
+```
+```bash
+# 3. Entra nella cartella
+cd Garbage-Classification
+```
+```bash
+# 4. installa le dipendenze
 pip install -r requirements.txt
 ```
 ```bash
-# 3. demo
+# 5. demo
 cd demo
 python3 demo.py
 ```
