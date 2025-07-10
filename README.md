@@ -67,4 +67,4 @@ https://github.com/user-attachments/assets/23d15f5a-9557-4c70-8739-056b043f612e
 
 ## Relazione
 
-La relazione finale del progetto è disponibile al seguente [**link**](https://github.com/miryrusso/Garbage-Classification/tree/main/docs)
+La relazione finale del progetto è disponibile al seguente [**link**](https://github.com/miryrusso/Garbage-Classification/blob/main/docs/relazione.pdf)
